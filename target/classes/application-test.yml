@@ -1,0 +1,60 @@
+server:
+    port: 8081
+    context-path: /demo
+logging:
+    config: classpath:log4j2.xml
+dubbo:
+    application:
+        name: springboot-dubbo-server  
+    scan:
+        basePackages: com.sinosoft.sinoep
+    registry:
+        id: my-registry
+        address: zookeeper://192.168.80.142:2181
+    protocol:
+        name: dubbo
+        port: 20887　  
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql  
+    
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://192.168.80.143:3306/pan?useUnicode=true&characterEncoding=utf8
+        username: root
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource #使用druid数据源
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+    jpa:
+        hibernate:
+           ddl-auto: update #自动更新
+           #physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #物理命名策略，用于转换“逻辑名称”(隐式或显式)的表或列成一个物理名称。
+           #implicit_naming_strategy: org.hibernate.boot.model.naming.SpringPhysicalNamingStrategy  #隐式命名策略，使用此属性当我们使用的表或列没有明确指定一个使用的名称 。
+        show-sql: true  #日志中显示sql语句
+        
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: UTC
+    resources:
+        static-locations: classpath:/static/
+        
+        
+        
+        
+        

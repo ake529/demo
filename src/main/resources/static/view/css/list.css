@@ -1,0 +1,250 @@
+li{
+	list-style: none;
+}
+.top{
+	margin-bottom: 2%;
+}
+button{
+    outline: none;
+    border: none;
+}
+#list button{
+    padding: 4px 8px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 0;
+}
+.btn-edit{
+    background-color: #537fbc;
+}
+.btn-view{
+    background-color: #ea854f;
+}
+.bg{
+    padding: 20px 15px 0px 15px;
+    background-color: #f4f4f4;
+}
+.bgW{
+    padding-top: 2%;
+    margin-bottom: 2%;
+    border: 1px solid #d6cece;
+    background-color: #fff;
+}
+.Btn{
+    padding: 7px 12px;
+    margin-left: 3%;
+    color: #fff;
+}
+.btn-search{
+    padding: 7px 12px;
+    margin-left: 3%;
+    color: #fff;
+    background-color: #ea854f;
+    border-radius: 0;
+}
+tbody tr td .btn-danger{
+	 padding: 7px 8px;
+	 font-size: 12px;
+	 border-radius: 0;
+}
+.btn-add{
+     border-radius: 0;
+	 background-color: #537fbc;
+}
+.btn-scan{
+     padding: 7px 20px;
+	 background-color: #639fdc;
+}
+#fileName{
+    padding: 6px;
+    border: 1px solid #d6cece;
+}
+#userName{
+      padding: 6px;
+      border: 1px solid #d6cece;      
+}
+.newApp{
+    padding: 7px 16px;
+    color: #fff;
+    background-color: #6aa4ed;
+}
+label{
+    line-height: 2.5;
+}
+#divpage .pagination{
+	margin: 0;
+}
+.sel{
+    width: 80%;
+    background-color: #eee;
+    outline: none;
+}
+.form-group label{
+    text-align:right;
+}
+.diglogmiddle{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+    float: none;
+    width:70%;
+}
+
+.diglogmiddle tr td{
+    padding-bottom: 15px;
+}
+
+.diglogmiddle tr td:first-child{
+    text-align: right;
+    padding-right: 15px;
+    width: 20%;
+}
+
+.diglogmiddle tr td:nth-child(2){
+    width: 80%;
+}
+
+.diglogmiddle tr td:nth-child(2) input{
+    width: 80%;
+}
+#contactDes{
+    height: 60px;
+}
+.diglogmiddle tr td:nth-child(2) .checkBox{
+    width: 10%;
+    margin: 0;
+    vertical-align: middle;
+}
+hr{
+    width: 90%;
+    border-top-width: 2px;
+}
+#view {
+	width: 100%;
+}
+
+.des-l,
+.des-r{
+	display: inline-block;
+}
+.des-l{
+    width: 68%;
+    text-align: center;
+}
+.des-r{
+    width: 26%;
+    margin-left: -54px;
+    color: #fff;
+}
+.des-l label{
+    padding-left: 18%;
+    padding-right: 4%;
+}
+.inputCss{
+    padding: 6px 35px;
+}
+.wrap{
+    padding-top: 2%;
+}
+.con{
+    width: 100%;
+    padding-left: 0;
+    
+}
+.con li{
+    display: inline-block;
+    width: 13%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.con li:first-child{
+    /* width: 15%;
+    margin-right: 5px; */
+}
+.con li:nth-child(3){
+   /*  width: 20%; */
+}
+.checkBox{
+    margin: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    text-align: left;
+}
+.form-control{
+    border-radius: 0;
+}
+li label{
+    margin-bottom: 0;
+}
+#listField{
+    width: 81%;
+    margin: 0 auto;
+}
+#listField tr th{
+    text-align: center;
+}
+#listField tr td {
+    height:30px;
+    line-height: 30px;
+    border: 0px;
+}
+#listField tbody tr td:first-child{
+	width:120px;
+}
+#listField tbody tr td:first-child input{
+    width:100%;
+    text-align: center;
+}
+#listField tbody tr td:nth-child(2){
+	width:66px;
+}
+#listField tbody td:nth-child(2) input{
+    width:66px;
+    text-align: center;
+}
+#listField tbody tr td:nth-child(3) select{
+    padding: 5px 0 6px;
+}
+#listField tbody tr td:nth-child(4) input{
+    width:30px;
+}
+#listField tbody tr td:nth-child(5){
+    width: 110px;
+}
+#listField tbody tr td:nth-child(5) input{
+    vertical-align: middle;
+    width: 16px;
+    margin: 0;
+}
+#listField tbody tr td:nth-child(6) ,
+#listField tbody tr td:nth-child(6) input{
+	width: 90px;
+}
+
+.line{
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+.rsWidth{
+    width: 89%;
+    margin: auto;
+}
+.sWidth{
+    width: 100%;
+}
+
+input[name = fieldName],
+input[name = field]{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: nowrap;
+}
+input[name = fieldName]{
+	width: 66px;
+}
+input[name = field]{
+	width: 93px;
+}
+

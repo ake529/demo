@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+<body>
+	<div>
+		<div>
+			<input type="hidden" id="idAdd"/>
+			<label>姓名：</label>
+			<input type="text" id="nameAdd"/>
+	    </div>
+		<div>
+			<label>性别：</label>
+			<select id="sexAdd" name="sexAdd">
+				<option value="1">男</option>
+				<option value="2">女</option>
+		    </select>
+	    </div>
+	    <div>
+			<label>年龄：</label>
+			<input type="text" id="ageAdd"/>
+			<button type="button" onclick="add()"><span></span>保存</button>
+	    </div>
+    </div>
+    <!--    <form name="upform" action="/threedo/api/upload" method="POST" enctype="multipart/form-data">
+	 <div>
+		    <span>文件上传：</span><input type="file" id="scripfile" name="scripfile"/>
+		    <input type="hidden" id="url_file" value=""/>
+	    </div>
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="../demo/batch"> 
+    	<p>文件1：<input type="file" name="file" id="file1"/></p> 
+    	<p>文件2：<input type="file" name="file" id="file2"/></p> 
+    	<p>
+    	<input type="submit" value="上传" id="scripfile"/> 
+    		<input type="hidden" id="url_file" value=""/>
+			<input type="submit" value="tijiao">
+    		<button type="button" class="btn-search" onclick="upload()">保存</button>
+    	</p> 
+    </form> 
+    <div>
+		<div>
+			<label>姓名：</label>
+			<input type="text" id="name"/>
+	    </div>
+		<div>
+			<label>性别：</label>
+			<select id="sex" name="sex">
+				<option value="">全部</option>
+				<option value="1">男</option>
+				<option value="2">女</option>
+		    </select>
+	    </div>
+	    <div>
+			<label>年龄：</label>
+			<input type="text" id="age"/>
+	    </div>
+	    <div>
+	    	<label>当前页：</label>
+			<input type="text" id="page"/>
+			<label>每页条数：</label>
+			<input type="text" id="rows"/>
+			<button type="button" onclick="getAll()"><span></span>查询</button>
+	    </div>
+    </div>-->
+    <div id="printall">
+		<table id="table">
+		     <thead>
+		     	<tr>
+			     	<th style="border:1px solid;width:200px;text-align:center;">姓名</th>
+			     	<th style="border:1px solid;width:200px;text-align:center;">性别</th>
+			     	<th style="border:1px solid;width:200px;text-align:center;">别名</th>
+			     	<th style="border:1px solid;width:200px;text-align:center;">操作</th>
+		     	</tr>
+		     </thead>
+		     <tbody id="tbody"></tbody>
+	   </table>
+	</div>
+	
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#page").val("1");
+			$("#rows").val("6");
+/* 			$(document).on("change","#scripfile",function(){
+				upload("scripfile");
+			}); */
+			getAll();
+		})
+		
+		/**
+		 * 获取项目名
+		 * 形如：/trade
+		 */
+		function getBasePath(){ 
+			 var pathName = document.location.pathname; 
+			 var index = pathName.substr(1).indexOf("/"); 
+			 var result = pathName.substr(0,index+1); 
+			 return result; 
+		}
+		
+		function getPath(){  
+			 return window.location.protocol +"//"+ window.location.host+getBasePath();
+		}
+		
+		var path = getPath();
+		
+		function getAll(){
+			var page = $("#page").val();
+			var rows = $("#rows").val();
+			console.info(page);
+			console.info(rows);
+			$.ajax({
+				type:"get",
+				url:path+"/dept/getPageDeptList",
+				data:{page:page,rows:rows,name:$("#name").val(),age:$("#age").val(),sex:$("#sex").val()},
+				dataType:"json",
+				async: false,
+				success:function(dataa){
+					var data = dataa.content;
+					console.info(dataa);
+					var view = "";
+					console.info(data.length>0);
+					if(data.length>0){
+						for(var i =0;data.length>i;i++ ){
+							view += "<tr>"
+							+"<td style='border:1px solid;width:200px;text-align:center;'>"+data[i].deptName+"</td>";
+							if(data[i].deptlevel == "1"){
+								view += "<td style='border:1px solid;width:200px;text-align:center;'>男</td>";
+							}else if(data[i].deptlevel == "2"){
+								view += "<td style='border:1px solid;width:200px;text-align:center;'>女</td>";
+							}
+							view += "<td style='border:1px solid;width:200px;text-align:center;'>"+data[i].deptNickName+"</td>"
+							+"<td style='border:1px solid;width:200px;text-align:center;'>"
+							+"<button onclick='edit(\""+data[i].deptName+"\")'><span></span>修改</button>&nbsp;&nbsp;"
+							+"<button onclick='del(\""+data[i].id+"\")'><span></span>删除</button>"
+							+"</td></tr>"; 
+						}
+						
+					}
+					$("#tbody").html(view);
+				}
+			})
+		}
+		
+		function add(){
+			console.info($("#scripfile").val());
+			console.info($("#url_file").val());
+			var name = $("#nameAdd").val();
+			var sex = $("#sexAdd").val();
+			var age = $("#ageAdd").val();
+			var id = $("#idAdd").val();
+			$.ajax({
+				type:"put",
+				url:path+"/dept/addDept",
+				data:{id:id,deptName:name,deptlevel:sex,deptNickName:age,url:$("#url_file").val()},
+				dataType:"text",
+				async: false,
+				success:function(data){
+				/* 	if(data == "ok"){
+						alert("保存成功！");
+						getAll();
+						$("#idAdd").val("");
+					}else{
+						alert("保存失败");
+					} */
+					alert("保存成功！");
+					getAll();
+				}
+			})
+		}
+		
+		function edit(name){
+			$.ajax({
+				type:"get",
+				url:path+"/dept/getDept",
+				data:{name:name},
+				dataType:"json",
+				async: false,
+				success:function(data){
+					$("#nameAdd").val(data.deptName);
+					$("#sexAdd").val(data.deptlevel);
+					$("#ageAdd").val(data.deptNickName);
+					$("#idAdd").val(data.id);
+				}
+			})
+		}
+		
+		function del(id){
+			$.ajax({
+				type:"post",
+				url:path+"/dept/deleteDept",
+				data:{id:id},
+				dataType:"text",
+				async: false,
+				success:function(data){
+						alert("删除成功！");
+						getAll();
+				}
+			})
+		}
+		
+		function upload(){
+//			if(fileId=="scripfile"){
+/* 				var filepath=$("#scripfile").val(); 
+		        var extStart=filepath.lastIndexOf("."); 
+		        var ext=filepath.substring(extStart,filepath.length).toUpperCase(); 
+		        var scriptpp = $("#scripfile").val().split("\\"); */
+/* 		        console.info(filepath);
+		        console.info(extStart);
+		        console.info(ext);
+		        console.info(scriptpp); */
+		        $.ajaxFileUpload({
+	    	        url: path+"/demo/batch", 
+	    	        type: 'post',
+	    	        secureuri: false, // 一般设置为false
+	    	        fileElementId: ["file1","file2"], // 上传文件的id、name属性名
+	    	        dataType: 'text', // 返回值类型，一般设置为json、application/json
+	    	        success: function(data, status){
+	    	            if(data !=null && data !=''){
+	    	        		$("#url_file").val(data);
+	    	        		alert("成功");
+	    	            }
+	    	            console.info($("#url_file").val());
+	    	        },
+	    	        error: function(data, status, e){
+	    	        	console.info(data);
+	    	        	alert("失败");
+	    	        }
+	    	    });
+//			}
+		}
+		
+	</script>
+</body>
+</html>
